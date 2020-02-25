@@ -1,0 +1,28 @@
+.sbd_button {
+    background-color: #686868; /* Green */
+    border-radius: 50px;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 4px;
+    width: 400px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.sbd_div {
+	width: 800px;
+	height: 800px;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
