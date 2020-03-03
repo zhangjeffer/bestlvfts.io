@@ -15,12 +15,16 @@
     <ul>
       <li><a href="/home">Home</a></li>
     </ul>
-    <form action = "/squat_upload_endpoint" method = "post" enctype="multipart/form-data">  
-        <input type="file" name="file" /><br> 
-        <select name="weight" id=weight></select>
-        <select name="reps" id=reps></select><br>
-        <input type="submit" value="Upload">  
-    </form>   
+    <div style="text-align:center">
+      <form class="upload_form" action = "/squat_upload_endpoint" method = "post" enctype="multipart/form-data">  
+          <input type="file" name="file" /><br> 
+          <label for="weight">weight lifted</label>
+          <select name="weight" id=weight></select><br>
+          <label for="reps">reps done</label>
+          <select name="reps" id=reps></select><br>
+          <input type="submit" value="Upload">  
+      </form>   
+    </div>
   </body>
   <script>
     function populate() {
