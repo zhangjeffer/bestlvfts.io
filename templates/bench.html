@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <style>
+      body {
+        font-family: 'Raleway';font-size: 22px;
+      }
+    </style>
+    <title>bestlvfts.io</title>
+  </head>
+  <body onload="onload()">
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div><h1 align="center">bench</h1></div>
+    <table id="bench_table" align="center"></table>
+  </body>
+  <script>
+    function populateTable(date, video, weight_stat) {
+      var src = '/static/videos/' + video;
+      var begin = '<tr><th><video height=240 width=300><source src="' + src + '"/><th><a href="/video/' + video + '">' + date + '</a><br>' + weight_stat + '</th>';
+      var table = document.getElementById("bench_table");
+      table.innerHTML += begin;
+    }
+
+    var HttpClient = function() {
+      this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+      }
+    }
+
+    function onload() {
+      if( window.localStorage )
+      {
+        if( !localStorage.getItem('firstLoad') )
+        {
+          localStorage['firstLoad'] = true;
+          window.location.reload();
+        }  
+        else
+          localStorage.removeItem('firstLoad');
+      }
+      getJson()
+    }
+
+    function getJson() {
+      const url = 'http://localhost:5000/bench_info'
+      fetch(url)
+      .then(response => response.json())  
+      .then(json => {
+          console.log(json);
+          for (var key in json) {
+            if (json.hasOwnProperty(key)) {
+              var date = key
+              var video = json[key][0]
+              var weight_stat = json[key][1]
+              populateTable(date, video, weight_stat)
+            }
+          }
+      })
+    }
+  </script>
+</html>

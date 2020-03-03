@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <style>
+      body {
+        font-family: 'Raleway';font-size: 22px;
+      }
+    </style>
+    <title>bestlvfts.io</title>
+  </head>
+
+  <body>
+    <br><br><br><br><br><br><br><br>
+    <div><h1 align="center">welcome to bestlvfts.io</h1></div>
+    <div class="login_div" id="login_div">
+        <form id="login_form">
+            <input type="text" id="login" placeholder="login">
+            <input type="password" id="password" placeholder="password">
+            <input type="button" onclick="log_in()" value="Log In">
+            <input type="button" onclick="pass_word()" value="Register"><br>
+        </form><br>
+    </div>
+  </body>
+  <script>
+      function log_in() {
+        var url = "http://localhost:5000/logincred";
+        var user = document.getElementById("login").value
+        var pass = document.getElementById("password").value
+        var params = "login=" + user + "&password=" + pass;
+        var http = new XMLHttpRequest();
+
+        http.open("GET", url+"?"+params, true);
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200) {
+                if (http.responseText == "true") {
+                    window.location.replace("http://localhost:5000/home");
+                } else {
+                    alert("invalid credentials. please try again!");
+                }
+            }
+        }
+        http.send(null);
+      }
+
+      function pass_word() {
+        window.location.replace("http://localhost:5000/register");
+        return false;
+      }
+  </script>
+</html>
