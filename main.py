@@ -87,7 +87,6 @@ def cred():
 
 @app.route('/delete_entry', methods=['GET'])
 def delete():
-    print("called")
     delVid = request.args.get('delete')
     delete_vid(delVid)
     return ""
@@ -99,8 +98,6 @@ def squat_upload_endpoint():
         if request.method == 'POST':  
             weight = request.values['weight']
             rep = request.values['reps']
-            print(weight)
-            print(rep)
             f = request.files['file']  
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
             return render_template("redirect_squat.html")  

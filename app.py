@@ -63,7 +63,6 @@ def delete_vid(mov):
       del squat.get(current_user)[delete_date]
    elif bench_bool:
       del bench.get(current_user)[delete_date]
-      print(bench)
    elif deadlift_bool:
       del deadlift.get(current_user)[delete_date]
    else:
@@ -76,7 +75,6 @@ def validateUser(username, password):
          current_user = username
          return "true"
    user_pass[username] = password
-   print(user_pass)
    return "false"
 
 

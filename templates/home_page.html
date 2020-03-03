@@ -12,6 +12,9 @@
     <title>bestlvfts.io</title>
   </head>
   <body>
+    <ul>
+      <li class="liright"><a onclick="signout()">signout</a></li>
+    </ul>
     <br><br><br><br><br><br><br><br>
     <div><h1 align="center">bestlvfts.io</h1></div>
     <div class="sbd_div">
@@ -20,4 +23,11 @@
       <a href="deadlift" class="sbd_button">Deadlift</a>
     </div>
   </body>
+  <script>
+    function signout() {
+        if (confirm("are you sure you want to signout?") == true) {
+            window.location.replace("http://localhost:5000/");
+        }
+    }
+  </script>
 </html>
