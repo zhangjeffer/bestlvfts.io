@@ -18,6 +18,9 @@
       <li class="liright"><a onclick="signout()">signout</a></li>
     </ul>
     <div><h1 align="center">squats</h1></div>
+    <form align="center" id="login_form">
+      <input type="button" onclick="upload()" value="add today's best squat">
+    </form><br>
     <table id="squat_table" align="center"></table>
   </body>
   <script>
@@ -44,6 +47,10 @@
         anHttpRequest.open( "GET", aUrl, true );            
         anHttpRequest.send( null );
       }
+    }
+
+    function upload() {
+      window.location.replace("http://localhost:5000/squatupload");
     }
 
     function onload() {

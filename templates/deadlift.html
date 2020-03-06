@@ -18,6 +18,9 @@
       <li class="liright"><a onclick="signout()">signout</a></li>
     </ul>
     <div><h1 align="center">deadlifts</h1></div>
+    <form align="center" id="login_form">
+        <input type="button" onclick="upload()" value="add today's best deadlift">
+    </form><br>
     <table id="deadlift_table" align="center"></table>
   </body>
   <script>
@@ -58,6 +61,10 @@
           localStorage.removeItem('firstLoad');
       }
       getJson()
+    }
+
+    function upload() {
+      window.location.replace("http://localhost:5000/deadliftupload");
     }
 
     function getJson() {

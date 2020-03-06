@@ -18,6 +18,9 @@
       <li class="liright"><a onclick="signout()">signout</a></li>
     </ul>
     <div><h1 align="center">bench</h1></div>
+    <form align="center" id="login_form">
+      <input type="button" onclick="upload()" value="add today's best bench">
+    </form><br>
     <table id="bench_table" align="center"></table>
   </body>
   <script>
@@ -32,6 +35,10 @@
         if (confirm("are you sure you want to signout?") == true) {
             window.location.replace("http://localhost:5000/");
         }
+    }
+
+    function upload() {
+      window.location.replace("http://localhost:5000/benchupload");
     }
 
     var HttpClient = function() {

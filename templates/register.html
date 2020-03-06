@@ -13,8 +13,8 @@
   </head>
 
   <body>
-    <br><br><br><br><br><br><br><br>
-    <div><h1 align="center">register for bestlvfts.io</h1></div>
+    <br><br><br><br><br><br>
+    <h1 align="center">register for bestlvfts.io</h1>
     <div class="login_div" id="login_div">
         <form id="login_form">
             <input type="text" id="login" placeholder="login">
@@ -30,7 +30,7 @@
         var password = document.getElementById("password").value;
         var confirm_password = document.getElementById("password_confirm").value;
         if (password == confirm_password) {
-            var url = "http://localhost:5000/logincred";
+            var url = "http://localhost:5000/create_account";
             var user = document.getElementById("login").value
             var pass = document.getElementById("password").value
             var params = "login=" + user + "&password=" + pass;
@@ -40,7 +40,7 @@
             http.onreadystatechange = function()
             {
                 if(http.readyState == 4 && http.status == 200) {
-                    if (http.responseText == "false") {
+                    if (http.responseText == "true") {
                         alert("account created");
                         window.location.replace("http://localhost:5000/");
                     } else {
@@ -49,6 +49,7 @@
                 }
             }
             http.send(null);
+
         } else {
             alert("passwords do not match. please try again!")
         }

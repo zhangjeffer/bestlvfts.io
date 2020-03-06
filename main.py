@@ -3,6 +3,8 @@ from flask import Flask, render_template, jsonify,flash, request, redirect, url_
 from werkzeug.utils import secure_filename
 from app import *
 import os
+import random
+import string
 
 app = Flask(__name__)
 
@@ -10,7 +12,7 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), "static", "videos")
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-user = "demo"
+current_file_num = 16
 
 @app.route("/")
 def login():
@@ -32,7 +34,6 @@ def squat():
 
 @app.route("/bench")
 def bench():
-    print('hello')
     return render_template("bench.html")
 
 
@@ -85,6 +86,16 @@ def cred():
     return validateUser(user, password)
 
 
+@app.route('/create_account', methods=['GET'])
+def create_account():
+    user = request.args.get('login')
+    password = request.args.get('password')
+    if validateUsername(user):
+        return "false"
+    add_to_accounts(user, password)
+    return "true"
+    
+
 @app.route('/delete_entry', methods=['GET'])
 def delete():
     delVid = request.args.get('delete')
@@ -96,10 +107,15 @@ def delete():
 def squat_upload_endpoint():  
     try:
         if request.method == 'POST':  
+            global current_file_num 
+            f = request.files['file']  
             weight = request.values['weight']
             rep = request.values['reps']
             f = request.files['file']  
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            filename = str(current_file_num) + ".mov"
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(filename)))
+            current_file_num += 1     
+            addSquat(weight, rep, filename)
             return render_template("redirect_squat.html")  
     except:
         return render_template("redirect_bench.html") 
@@ -108,11 +124,20 @@ def squat_upload_endpoint():
 @app.route('/bench_upload_endpoint', methods = ['POST'])  
 def bench_upload_enpoint():  
     try:
-        if request.method == 'POST':  
+        if request.method == 'POST': 
+            global current_file_num 
             f = request.files['file']  
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            weight = request.values['weight']
+            rep = request.values['reps']
+            f = request.files['file']  
+            filename = str(current_file_num) + ".mov"
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(filename)))
+            current_file_num += 1           
+            addBench(weight, rep, filename)
             return render_template("redirect_bench.html") 
-    except:
+    except Exception as e: 
+        print(e)
+        print('bad')
         return render_template("redirect_bench.html") 
 
 
@@ -120,8 +145,15 @@ def bench_upload_enpoint():
 def deadlift_upload_endpoint():  
     try:
         if request.method == 'POST':  
+            global current_file_num 
             f = request.files['file']  
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            weight = request.values['weight']
+            rep = request.values['reps']
+            f = request.files['file']  
+            filename = str(current_file_num) + ".mov"
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(filename)))
+            current_file_num += 1     
+            addDeadlift(weight, rep, filename)
             return render_template("redirect_deadlift.html")  
     except:
         return render_template("redirect_bench.html") 

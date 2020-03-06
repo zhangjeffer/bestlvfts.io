@@ -1,5 +1,6 @@
 import glob, os
 import json
+import datetime
 
 current_user = "demo"
 
@@ -72,10 +73,52 @@ def validateUser(username, password):
    validate_pass = user_pass.get(username)
    if validate_pass is not None:
       if password == validate_pass:
+         global current_user
          current_user = username
+         print(current_user)
          return "true"
-   user_pass[username] = password
    return "false"
+
+def validateUsername(username):
+   validate_pass = user_pass.get(username)
+   if validate_pass is not None:
+      return True
+
+def addDeadlift(weight, reps, filename):
+   global deadlift
+   #add to bench dict
+   add_to_dict = {"current_date": [filename, "test"]}
+   if (deadlift.get(current_user) is None):
+      deadlift[current_user] = add_to_dict
+   else:
+      deadlift.get(current_user)["test"] = [filename, "hello"]
+
+
+def addSquat(weight, reps, filename):
+   global squat
+   #add to bench dict
+   add_to_dict = {"current_date": [filename, "test"]}
+   if (squat.get(current_user) is None):
+      squat[current_user] = add_to_dict
+   else:
+      squat.get(current_user)["test"] = [filename, "hello"]
+
+
+def addBench(weight, reps, filename):
+   global bench
+   #add to bench dict
+   add_to_dict = {"current_date": [filename, "test"]}
+   if (bench.get(current_user) is None):
+      bench[current_user] = add_to_dict
+   else:
+      bench.get(current_user)["test"] = [filename, "hello"]
+   print(bench)
+
+
+def add_to_accounts(username, password):
+   global user_pass
+   user_pass[username] = password
+   print(user_pass)
 
 
 def printDeadliftJson():
