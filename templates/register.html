@@ -13,6 +13,11 @@
   </head>
 
   <body>
+    <ul>
+      <li><a href="/home">home</a></li>
+      <li><a href="#about">about</a></li>
+      <li class="liright"><a onclick="signout()">signout</a></li>
+    </ul>
     <br><br><br><br><br><br>
     <h1 align="center">register for bestlvfts.io</h1>
     <div class="login_div" id="login_div">
@@ -54,5 +59,11 @@
             alert("passwords do not match. please try again!")
         }
       }
+
+      function signout() {
+        if (confirm("are you sure you want to signout?") == true) {
+            window.location.replace("http://localhost:5000/");
+        }
+    }
   </script>
 </html>

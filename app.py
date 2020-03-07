@@ -1,6 +1,6 @@
 import glob, os
 import json
-import datetime
+from datetime import date
 
 current_user = "demo"
 
@@ -86,33 +86,53 @@ def validateUsername(username):
 
 def addDeadlift(weight, reps, filename):
    global deadlift
-   #add to bench dict
-   add_to_dict = {"current_date": [filename, "test"]}
+   today = date.today()
+   current_date = today.strftime("%m/%d/%y")
+
+   add_to_dict = {current_date: [filename, weight + " x " + reps]}
    if (deadlift.get(current_user) is None):
       deadlift[current_user] = add_to_dict
+   elif (deadlift.get(current_user).get(current_date) is None):
+      replace_dict = {current_date: [filename, weight + " x " + reps]}
+      for key, value in deadlift.get(current_user).items():
+         replace_dict[key] = value;
+      deadlift[current_user] = replace_dict
    else:
-      deadlift.get(current_user)["test"] = [filename, "hello"]
+      deadlift.get(current_user)[current_date] = [filename, weight + " x " + reps]
 
 
 def addSquat(weight, reps, filename):
    global squat
-   #add to bench dict
-   add_to_dict = {"current_date": [filename, "test"]}
+   today = date.today()
+   current_date = today.strftime("%m/%d/%y")
+
+   add_to_dict = {current_date: [filename, weight + " x " + reps]}
    if (squat.get(current_user) is None):
       squat[current_user] = add_to_dict
+   elif (squat.get(current_user).get(current_date) is None):
+      replace_dict = {current_date: [filename, weight + " x " + reps]}
+      for key, value in squat.get(current_user).items():
+         replace_dict[key] = value;
+      squat[current_user] = replace_dict
    else:
-      squat.get(current_user)["test"] = [filename, "hello"]
+      squat.get(current_user)[current_date] = [filename, weight + " x " + reps]
 
 
 def addBench(weight, reps, filename):
    global bench
-   #add to bench dict
-   add_to_dict = {"current_date": [filename, "test"]}
+   today = date.today()
+   current_date = today.strftime("%m/%d/%y")
+
+   add_to_dict = {current_date: [filename, weight + " x " + reps]}
    if (bench.get(current_user) is None):
       bench[current_user] = add_to_dict
+   elif (bench.get(current_user).get(current_date) is None):
+      replace_dict = {current_date: [filename, weight + " x " + reps]}
+      for key, value in bench.get(current_user).items():
+         replace_dict[key] = value;
+      bench[current_user] = replace_dict
    else:
-      bench.get(current_user)["test"] = [filename, "hello"]
-   print(bench)
+      bench.get(current_user)[current_date] = [filename, weight + " x " + reps]
 
 
 def add_to_accounts(username, password):

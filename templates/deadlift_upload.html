@@ -13,16 +13,21 @@
   </head>
   <body onload="populate()">
     <ul>
-      <li><a href="/home">Home</a></li>
+      <li><a a href="/deadlift">back</a></li>
+      <li class="liright"><a onclick="signout()">signout</a></li>
     </ul>
+    <br><br><br><br><br><br>
     <div style="text-align:center">
       <form class="upload_form" action = "/deadlift_upload_endpoint" method = "post" enctype="multipart/form-data">  
-          <input type="file" name="file" /><br> 
+          <input type="file" name="file" /><br>
+          <label><br></label>
           <label for="weight">weight lifted</label>
           <select name="weight" id=weight></select><br>
+          <label><br></label>
           <label for="reps">reps done</label>
-          <select name="reps" id=reps></select><br>
-          <input type="submit" value="Upload">  
+          <select name="reps" id=reps></select>
+          <label><br></label><label><br></label><label><br></label>
+          <input type="submit" value="Upload"> 
       </form>   
     </div>
   </body>
@@ -36,6 +41,16 @@
       for (i = 45; i < 1005; i+=5) {
         selectweight.options[selectweight.options.length] = new Option(i);
       }
+    }
+
+    function back() {
+        window.history.back();
+    }
+
+    function signout() {
+        if (confirm("are you sure you want to signout?") == true) {
+            window.location.replace("http://localhost:5000/");
+        }
     }
   </script>
 </html>
